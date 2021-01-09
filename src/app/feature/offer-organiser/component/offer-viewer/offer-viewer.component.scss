@@ -1,0 +1,116 @@
+.mat-table {
+  height: 82vh;
+  width: 100%;
+  opacity: 0.8;
+  background-color: black;
+  table-layout: fixed;
+  overflow: auto;
+}
+
+.mat-table-container{
+  position: relative;
+}
+
+.mat-progress-spinner{
+  position: fixed;
+  left: calc(50% - 100px);
+  top: calc(50% - 100px);
+}
+
+.offer-viewer {
+  position: fixed;
+  top: 70px;
+  left: 140px;
+  height: calc(100% - 100px);
+  width: calc(100% - 160px);
+}
+
+.linkBox{
+  display: block;
+  text-align: left !important;
+  color: silver;
+}
+
+.applied-button {
+  width: 170px !important;
+  justify-content: center;
+}
+
+.skipped-button {
+  width: 80px !important;
+  justify-content: center;
+}
+
+.mat-cell {
+  width: 100%;
+  justify-content: center;
+}
+
+.mat-cell a {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.mat-header-cell{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-form-field {
+  height: 50px;
+  top: calc(50% - 25px);
+  text-align: center;
+}
+
+.mat-column-companyName{
+  flex: 0 0 200px;
+}
+
+.mat-column-offerName{
+  flex: 0 0 200px;
+}
+
+.mat-column-links{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mat-column-applied{
+  flex: 0 0 200px;
+}
+
+.mat-column-skipped{
+  flex: 0 0 80px;
+}
+
+td.mat-cell{
+  border-bottom-style: none;
+}
+
+.topBar{
+  position: relative;
+  height: 3vh;
+  color: white;
+  background-color: black;
+  opacity: 0.8;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.bottomBar{
+  position: relative;
+  height: 3vh;
+  color: white;
+  background-color: black;
+  opacity: 0.8;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+

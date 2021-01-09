@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-image: url("https://www.pxwall.com/wp-content/uploads/2018/07/Wallpaper%20Colors,%20lights,%20bokeh,%206K,%20Abstract%206900111550.jpg");
+  background-size: 100%;
+}
