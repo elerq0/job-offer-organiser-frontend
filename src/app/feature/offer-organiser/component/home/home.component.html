@@ -1,0 +1,81 @@
+<div class="organiser-show-hide-options">
+  <button mat-raised-button color="primary" *ngIf="hide"
+          @enterLeave (click)="hide = false">Show options
+  </button>
+  <div [@showHide]="hide ? 'hide' : 'show'">
+    <button mat-raised-button color="primary" *ngIf="!hide && offerViewer.state !== offerViewer.States.Not_Started"
+            (click)="hide = true">Hide options
+    </button>
+  </div>
+
+</div>
+
+<app-offer-viewer #offerViewer>
+</app-offer-viewer>
+
+<mat-card class="organiser-position" [@showHide]="hide ? 'hide' : 'show'">
+  <mat-card-content>
+    <app-select-dropdown #selectSearchHistory
+                         [title]="'Search history'"
+                         [values]="searchOptions"
+                         (newValue)="setCurrentSearchOptions($event)">
+    </app-select-dropdown>
+
+    <form [formGroup]="form">
+      <mat-error *ngIf="errorMessage; else noError">
+        {{errorMessage}}
+      </mat-error>
+      <ng-template #noError><p class="error" style="opacity: 0; user-select: none">''</p></ng-template>
+      <mat-form-field class="full-width-input">
+        <label>
+          <input matInput placeholder="Title" formControlName="title" required>
+        </label>
+        <mat-error *ngIf="form.controls['title'].errors">
+          <a *ngIf="form.controls['title'].errors.required">Title is required</a>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <label>
+          <input matInput placeholder="Location" formControlName="location" required>
+        </label>
+        <mat-error *ngIf="form.controls['location'].errors">
+          <a *ngIf="form.controls['location'].errors.required">Location is required</a>
+        </mat-error>
+      </mat-form-field>
+      <div class="spacer"><p></p></div>
+      <div class="multi-select-field">
+        <app-multi-select-dropdown #multiSelectTechnologies
+                                   [title]="(form.controls['technology'].value && form.controls['technology'].value != '') ?
+            form.controls['technology'].value.toString() : 'Technology'"
+                                   [values]="availableTechnologies"
+                                   [disabled]="form.disabled"
+                                   (shareCheckedList)="setTechnologies($event)">
+        </app-multi-select-dropdown>
+      </div>
+      <div class="multi-select-field">
+        <app-multi-select-dropdown #multiSelectExperienceLevels
+                                   [title]="(form.controls['experienceLevel'].value && form.controls['experienceLevel'].value != '') ?
+            form.controls['experienceLevel'].value.toString() : 'Experience level'"
+                                   [values]="availableExperienceLevels"
+                                   [disabled]="form.disabled"
+                                   (shareCheckedList)="setExperienceLevels($event)">
+        </app-multi-select-dropdown>
+      </div>
+      <div class="multi-select-field">
+        <app-multi-select-dropdown #multiSelectWebsites
+                                   [title]="(form.controls['website'].value && form.controls['website'].value != '') ?
+            form.controls['website'].value.toString() : 'Website *'"
+                                   [values]="availableWebsites"
+                                   [error]="!!form.controls['website'].errors || (operationInvalid && form.controls['website'].value === '')"
+                                   [disabled]="form.disabled"
+                                   (shareCheckedList)="setWebsites($event)">
+        </app-multi-select-dropdown>
+      </div>
+      <p class="error" *ngIf="!!form.controls['website'].errors || (operationInvalid && form.controls['website'].value === '');
+          else noWebsiteError">Website is required
+      </p>
+      <ng-template #noWebsiteError><p class="error" style="opacity: 0; user-select: none">''</p></ng-template>
+      <button mat-raised-button color="primary" (click)="onSubmit()">Find offers</button>
+    </form>
+  </mat-card-content>
+</mat-card>

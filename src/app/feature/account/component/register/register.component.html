@@ -1,0 +1,42 @@
+<mat-card class="account-position">
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h2>Register</h2>
+      <mat-error *ngIf="registrationInvalid; else noError">
+        {{errorMessage}}
+      </mat-error>
+      <ng-template #noError><p class="error" style="opacity: 0; user-select: none">''</p></ng-template>
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Username" formControlName="username" required>
+        <mat-error *ngIf="form.controls['username'].errors">
+          <a *ngIf="form.controls['username'].errors.required">Username is required</a>
+          <a *ngIf="form.controls['username'].errors.minlength">Username is too short</a>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Password" formControlName="password" required>
+        <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error *ngIf="form.controls['password'].errors">
+          <a *ngIf="form.controls['password'].errors.required">Password is required</a>
+          <a *ngIf="form.controls['password'].errors.minlength">Password is too short</a>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [type]="hideConfirmation ? 'password' : 'text'" placeholder="Confirm password" formControlName="confirmation" required>
+        <mat-icon matSuffix (click)="hideConfirmation = !hideConfirmation">{{hideConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error *ngIf="form.controls['confirmation'].errors">
+          <a *ngIf="form.controls['confirmation'].errors.required">Password confirmation is required</a>
+          <a *ngIf="form.controls['confirmation'].errors.mustMatch">Passwords must match</a>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Email" formControlName="email" required>
+        <mat-error *ngIf="form.controls['email'].errors">
+          <a *ngIf="form.controls['email'].errors.required">Email is required</a>
+          <a *ngIf="form.controls['email'].errors.pattern">Email is not valid</a>
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary">Register</button>
+    </form>
+  </mat-card-content>
+</mat-card>

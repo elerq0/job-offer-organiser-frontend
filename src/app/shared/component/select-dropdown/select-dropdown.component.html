@@ -1,0 +1,13 @@
+<div>
+  <div (mouseleave)="showDropDown = false">
+    <button mat-raised-button color="primary"
+            (click)="showDropDown=!showDropDown"> {{title}}
+    </button>
+    <div class="drop-show scrollbar" *ngIf="showDropDown">
+      <div *ngFor="let a of values">
+        <button (click)="onChange(a)">{{a.toString()}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

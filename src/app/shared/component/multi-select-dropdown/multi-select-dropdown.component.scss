@@ -1,0 +1,54 @@
+.drop-toggle{
+  padding: 5px 10px;
+  border-radius: 4px;
+  text-align: left;
+  background-color: black;
+  width: 100%;
+  position: relative;
+  top: 5px;
+}
+
+.drop-toggle-null {
+  @extend .drop-toggle;
+  border: 1px solid #ccc;
+  color: darkgray;
+}
+
+.drop-toggle-ok {
+  @extend .drop-toggle;
+  border: 1px solid #ccc;
+  color: white;
+}
+
+.drop-toggle-error {
+  @extend .drop-toggle;
+  border: 1px solid #F44336;
+  color: #F44336;
+}
+
+.drop-toggle i{
+  float:right;
+}
+.drop-show {
+  padding: 4px;
+  width: calc(100% - 10px);
+  border: 1px solid #BABABA;
+  position: absolute;
+  z-index: 100;
+  -webkit-box-shadow: 0 6px 10px rgba(0,0,0,.15);
+  -moz-box-shadow: 0 6px 10px rgba(0,0,0,.15);
+  box-shadow: 0 6px 10px rgba(0,0,0,.15);
+  background-color: black;
+}
+
+.drop-show label{
+  display:block;
+  font-size:15px;
+  cursor: pointer;
+}
+.drop-show label input{
+  vertical-align: top;
+}
+.drop-show label span{
+  display:inline-block;
+}

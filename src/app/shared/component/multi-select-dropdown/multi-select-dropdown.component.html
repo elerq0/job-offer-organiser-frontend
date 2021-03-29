@@ -1,0 +1,18 @@
+<span>
+  <span (mouseleave)="showDropDown = false">
+    <button [ngClass]="error ? 'drop-toggle-error btn flat' :
+    checkedList.length > 0 && !disabled ? 'drop-toggle-ok btn flat' : 'drop-toggle-null btn flat'"
+            (click)="showDropDown=!showDropDown"
+            [disabled]="disabled">
+      <span>{{title}}</span>
+      <i class="fa fa-angle-down"></i>
+    </button>
+    <div class="drop-show" *ngIf="showDropDown">
+      <label *ngFor="let a of stateValues">
+        <input type="checkbox" [(ngModel)]="a.checked"
+               (change)="getSelectedValue(a.checked,a.name)"/>
+        <span>{{a.name}}</span>
+      </label>
+    </div>
+  </span>
+</span>

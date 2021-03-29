@@ -1,0 +1,68 @@
+.mat-card {
+  width: 400px;
+  margin: 5px;
+  text-align: center;
+  opacity: 0.8;
+  background-color: black;
+  border-radius: 12px;
+}
+
+.mat-form-field {
+  display: block;
+}
+
+.mat-raised-button {
+  width: 100px;
+}
+
+.mat-toolbar {
+  position: relative;
+  opacity: 0.8;
+  background-color: black;
+  height: 50px;
+}
+
+.multi-select-field {
+  position: relative;
+  height: 45px;
+  white-space: nowrap;
+}
+
+.error {
+  color: #F44336;
+  font-size: 75%;
+  font-weight: 400;
+  line-height: 1.125;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  text-align: left !important;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.spacer-mini {
+  flex: 0.01 0.01 auto;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 50px black inset;
+  -webkit-text-fill-color: white;
+}
+
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 50px black inset;
+  -webkit-text-fill-color: white;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 12px;
+  //background-color: dimgrey;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  //-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: purple;
+}

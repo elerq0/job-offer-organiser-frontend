@@ -1,0 +1,117 @@
+<div class="offer-viewer">
+  <mat-progress-spinner *ngIf="state == States.Loading"
+                        [color]="'primary'"
+                        [mode]="'indeterminate'"
+                        [diameter]="200">
+  </mat-progress-spinner>
+
+  <div *ngIf="state == States.Completed" @enterLeave>
+    <div class="topBar">
+      <mat-error *ngIf="errorMessage; else noError">
+        {{errorMessage}}
+      </mat-error>
+      <ng-template #noError><p class="error" style="opacity: 0; user-select: none">''</p></ng-template>
+    </div>
+    <div class="mat-table-container">
+      <mat-table matTableFilter [exampleEntity]="filterEntity" class="scrollbar"
+                 [filterType]="filterType" [dataSource]="dataSource">
+
+        <ng-container matColumnDef="companyName">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-form-field appearance="outline">
+              <label>
+                <input matInput placeholder="Company" [(ngModel)]="filterEntity.companyName">
+              </label>
+            </mat-form-field>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a>{{element.companyName}}</a>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="offerName">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-form-field appearance="outline">
+              <label>
+                <input matInput placeholder="Offer" [(ngModel)]="filterEntity.offerName">
+              </label>
+            </mat-form-field>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a>{{element.offerName}}</a>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="links">
+          <mat-header-cell *matHeaderCellDef>
+            <a>Links</a>
+          </mat-header-cell>
+          <td mat-cell *matCellDef="let element">
+            <div *ngFor="let link of element.offerLinks">
+              <a class="linkBox" href="{{link}}" target="_blank">{{link}}</a>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="applied">
+          <mat-header-cell *matHeaderCellDef>
+            <app-tri-state-checkbox [(ngModel)]="filterEntity.applied">
+              <ng-container *ngIf="filterEntity.applied === null; else appliedNotNull">
+                Both
+              </ng-container>
+              <ng-template #appliedNotNull>
+                <ng-container *ngIf="filterEntity.applied === true; else appliedFalse">
+                  Already applied
+                </ng-container>
+                <ng-template #appliedFalse>
+                  Ready to apply
+                </ng-template>
+              </ng-template>
+            </app-tri-state-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-raised-button *ngIf="!element.applied; else notApplied" class="applied-button"
+                    (click)="setApplied(element, true)"> Set as applied
+            </button>
+            <ng-template #notApplied>
+              <button mat-raised-button (click)="setApplied(element, false)" class="applied-button">Remove from applied
+              </button>
+            </ng-template>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="skipped">
+          <mat-header-cell *matHeaderCellDef>
+            <app-tri-state-checkbox [(ngModel)]="filterEntity.skipped">
+              <ng-container *ngIf="filterEntity.skipped === null; else skippedNotNull">
+                Both
+              </ng-container>
+              <ng-template #skippedNotNull>
+                <ng-container *ngIf="filterEntity.skipped === true; else skippedFalse">
+                  Skipped
+                </ng-container>
+                <ng-template #skippedFalse>
+                  New
+                </ng-template>
+              </ng-template>
+            </app-tri-state-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-raised-button *ngIf="!element.skipped; else notSkipped" class="skipped-button"
+                    (click)="setSkipped(element, true)">Skip
+            </button>
+            <ng-template #notSkipped>
+              <button mat-raised-button (click)="setSkipped(element, false)" class="skipped-button">Restore</button>
+            </ng-template>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" ></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+    <div class="bottomBar">
+      <mat-label>Total: {{getTotal()}}</mat-label>
+    </div>
+  </div>
+</div>
